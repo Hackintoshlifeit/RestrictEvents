@@ -379,6 +379,7 @@ struct RestrictEventsPolicy {
 			enableMemoryUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
 			enablePciUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
 			enableCpuNamePatching = true;
+			enableSbvmmPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple && getKernelVersion() >= KernelVersion::Monterey && strcmp(info->modelIdentifier, "iMac19,1") != 0;
 		}
 
 		DBGLOG("rev", "revpatch to enable %s", duip);
