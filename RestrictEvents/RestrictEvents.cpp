@@ -376,8 +376,8 @@ struct RestrictEventsPolicy {
 		if (strstr(value, "auto", strlen("auto"))) {
 			// Do not enable Memory and PCI UI patching on real Macs
 			// Reference: https://github.com/acidanthera/bugtracker/issues/2046
-			// enableMemoryUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
-			// enablePciUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
+			enableMemoryUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
+			enablePciUiPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple;
 			enableCpuNamePatching = true;
 			enableSbvmmPatching = info->firmwareVendor != DeviceInfo::FirmwareVendor::Apple && getKernelVersion() >= KernelVersion::Monterey && strcmp(info->modelIdentifier, "iMac19,1") != 0;
 		}
@@ -502,7 +502,7 @@ PluginConfiguration ADDPR(config) {
 	bootargBeta,
 	arrsize(bootargBeta),
 	KernelVersion::MountainLion,
-	KernelVersion::Sonoma,
+	KernelVersion::Sequoia,
 	[]() {
 		DBGLOG("rev", "restriction policy plugin loaded");
 		verboseProcessLogging = checkKernelArgument("-revproc");
